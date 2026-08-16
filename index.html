@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>PARTIENCE MARKET</title>
+
+<!-- KKiaPay -->
+<script src="https://cdn.kkiapay.me/k.js"></script>
+
+<style>
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#f5f6f8;
+color:#111827;
+}
+
+/* HEADER */
+
+header{
+background:#111827;
+color:white;
+padding:16px;
+position:sticky;
+top:0;
+z-index:100;
+}
+
+.header-content{
+display:flex;
+justify-content:space-between;
+align-items:center;
+max-width:1200px;
+margin:auto;
+}
+
+.logo{
+font-size:20px;
+font-weight:bold;
+}
+
+.cart-top{
+border:0;
+background:white;
+color:#111827;
+padding:9px 13px;
+border-radius:20px;
+font-weight:bold;
+}
+
+/* HERO */
+
+.hero{
+background:linear-gradient(135deg,#111827,#2563eb);
+color:white;
+text-align:center;
+padding:45px 20px;
+}
+
+.hero h1{
+font-size:32px;
+margin-bottom:12px;
+}
+
+.hero p{
+font-size:16px;
+line-height:1.5;
+}
+
+.hero-button{
+margin-top:20px;
+border:0;
+background:white;
+color:#111827;
+padding:13px 22px;
+border-radius:12px;
+font-weight:bold;
+}
+
+/* RECHERCHE */
+
+.search{
+max-width:700px;
+margin:20px auto;
+padding:0 15px;
+}
+
+.search input{
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:12px;
+font-size:16px;
+outline:none;
+}
+
+/* CATEGORIES */
+
+.categories{
+padding:0 15px 15px;
+max-width:1200px;
+margin:auto;
+}
+
+.category-list{
+display:flex;
+gap:8px;
+overflow-x:auto;
+}
+
+.category{
+border:0;
+background:white;
+padding:10px 15px;
+border-radius:20px;
+white-space:nowrap;
+}
+
+/* PRODUITS */
+
+.products{
+max-width:1200px;
+margin:auto;
+padding:10px 15px 40px;
+}
+
+.products-title{
+font-size:23px;
+margin-bottom:18px;
+}
+
+.product-grid{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:12px;
+}
+
+.product{
+background:white;
+border-radius:16px;
+padding:10px;
+box-shadow:0 4px 15px rgba(0,0,0,.07);
+position:relative;
+overflow:hidden;
+}
+
+.product-image{
+width:100%;
+height:170px;
+background:#eef0f3;
+border-radius:12px;
+overflow:hidden;
+margin-bottom:10px;
+}
+
+.product-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.favorite{
+position:absolute;
+top:18px;
+right:18px;
+width:38px;
+height:38px;
+border:0;
+border-radius:50%;
+background:white;
+font-size:21px;
+box-shadow:0 2px 8px rgba(0,0,0,.2);
+z-index:2;
+}
+
+.product h3{
+font-size:15px;
+margin-bottom:6px;
+}
+
+.description{
+color:#6b7280;
+font-size:13px;
+line-height:1.4;
+min-height:36px;
+}
+
+.price{
+font-size:17px;
+font-weight:bold;
+margin:10px 0;
+}
+
+.add{
+width:100%;
+border:0;
+background:#111827;
+color:white;
+padding:10px;
+border-radius:9px;
+font-weight:bold;
+}
+
+/* PANIER */
+
+.cart-floating{
+position:fixed;
+right:15px;
+bottom:20px;
+z-index:200;
+border:0;
+background:#2563eb;
+color:white;
+padding:14px 18px;
+border-radius:30px;
+font-weight:bold;
+box-shadow:0 5px 20px rgba(0,0,0,.25);
+}
+
+/* MODAL */
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.65);
+z-index:500;
+padding:15px;
+}
+
+.modal-content{
+background:white;
+max-width:520px;
+margin:25px auto;
+border-radius:18px;
+padding:20px;
+max-height:90vh;
+overflow-y:auto;
+}
+
+.modal-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px;
+}
+
+.close{
+border:0;
+background:#eee;
+width:36px;
+height:36px;
+border-radius:50%;
+font-size:22px;
+}
+
+/* PANIER */
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+gap:10px;
+align-items:center;
+border-bottom:1px solid #eee;
+padding:14px 0;
+}
+
+.cart-info{
+flex:1;
+}
+
+.cart-name{
+font-weight:bold;
+margin-bottom:5px;
+}
+
+.quantity{
+display:flex;
+align-items:center;
+gap:8px;
+margin-top:8px;
+}
+
+.quantity button{
+width:30px;
+height:30px;
+border:0;
+border-radius:8px;
+background:#eee;
+font-size:18px;
+}
+
+.delete{
+border:0;
+background:#fee2e2;
+color:#dc2626;
+padding:8px;
+border-radius:8px;
+}
+
+.total{
+font-size:21px;
+font-weight:bold;
+margin:20px 0;
+}
+
+/* FORMULAIRE */
+
+.form-group{
+margin-bottom:14px;
+}
+
+.form-group label{
+display:block;
+font-weight:bold;
+margin-bottom:6px;
+}
+
+.form-group input{
+width:100%;
+padding:13px;
+border:1px solid #ddd;
+border-radius:10px;
+font-size:16px;
+}
+
+.payment{
+background:#f5f6f8;
+padding:15px;
+border-radius:12px;
+margin-top:15px;
+}
+
+.payment label{
+display:block;
+padding:10px 0;
+}
+
+.confirm{
+width:100%;
+border:0;
+background:#16a34a;
+color:white;
+padding:14px;
+border-radius:11px;
+font-weight:bold;
+font-size:16px;
+margin-top:15px;
+}
+
+.pay-button{
+width:100%;
+border:0;
+background:#2563eb;
+color:white;
+padding:15px;
+border-radius:11px;
+font-weight:bold;
+font-size:16px;
+margin-top:12px;
+}
+
+/* FOOTER */
+
+footer{
+background:#111827;
+color:white;
+text-align:center;
+padding:35px 15px;
+}
+
+footer h2{
+margin-bottom:10px;
+}
+
+.phone{
+font-size:20px;
+font-weight:bold;
+margin:15px 0;
+}
+
+.whatsapp{
+display:inline-block;
+text-decoration:none;
+background:#25D366;
+color:white;
+padding:13px 20px;
+border-radius:10px;
+font-weight:bold;
+}
+
+/* MESSAGE */
+
+#message{
+display:none;
+position:fixed;
+left:15px;
+right:15px;
+bottom:85px;
+background:#111827;
+color:white;
+padding:13px;
+border-radius:10px;
+text-align:center;
+z-index:1000;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+.hero h1{
+font-size:27px;
+}
+
+.product-image{
+height:145px;
+}
+
+.product h3{
+font-size:14px;
+}
+
+.price{
+font-size:16px;
+}
+
+.add{
+font-size:13px;
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="header-content">
+
+<div class="logo">
+🛍️ PARTIENCE MARKET
+</div>
+
+<button
+class="cart-top"
+onclick="openCart()">
+
+🛒 <span id="topCount">0</span>
+
+</button>
+
+</div>
+
+</header>
+
+
+<section class="hero">
+
+<h1>
+PARTIENCE MARKET
+</h1>
+
+<p>
+Téléphones • Gaming • Simulation • Électronique
+</p>
+
+<button
+class="hero-button"
+onclick="scrollToProducts()">
+
+Découvrir les produits
+
+</button>
+
+</section>
+
+
+<div class="search">
+
+<input
+type="text"
+id="search"
+placeholder="🔎 Rechercher un produit..."
+oninput="searchProducts()">
+
+</div>
+
+
+<section class="categories">
+
+<div class="category-list">
+
+<button
+class="category"
+onclick="filterProducts('all')">
+
+Tous
+
+</button>
+
+<button
+class="category"
+onclick="filterProducts('phone')">
+
+📱 Smartphones
+
+</button>
+
+<button
+class="category"
+onclick="filterProducts('gaming')">
+
+🎮 Gaming
+
+</button>
+
+<button
+class="category"
+onclick="filterProducts('simulation')">
+
+✈️ Simulation
+
+</button>
+
+</div>
+
+</section>
+
+
+<section
+class="products"
+id="products">
+
+<h2 class="products-title">
+🔥 Nos produits
+</h2>
+
+
+<div class="product-grid">
+
+
+<!-- PS5 -->
+
+<div
+class="product"
+data-category="gaming"
+data-name="PlayStation 5">
+
+<button
+class="favorite"
+onclick="toggleFavorite(this,'PlayStation 5')">
+
+♡
+
+</button>
+
+<div class="product-image">
+
+<img
+src="images/IMG_2014.png"
+alt="PlayStation 5">
+
+</div>
+
+<h3>
+PlayStation 5
+</h3>
+
+<p class="description">
+Console PlayStation 5 pour une expérience gaming immersive.
+</p>
+
+<div class="price">
+450 000 FCFA
+</div>
+
+<button
+class="add"
+onclick="addToCart('PlayStation 5',450000)">
+
+Ajouter au panier
+
+</button>
+
+</div>
+
+
+<!-- IPHONE 16E -->
+
+<div
+class="product"
+data-category="phone"
+data-name="iPhone 16e">
+
+<button
+class="favorite"
+onclick="toggleFavorite(this,'iPhone 16e')">
+
+♡
+
+</button>
+
+<div class="product-image">
+
+<img
+src="images/IMG_2015.jpeg"
+alt="iPhone 16e">
+
+</div>
+
+<h3>
+iPhone 16e
+</h3>
+
+<p class="description">
+Smartphone Apple élégant et performant.
+</p>
+
+<div class="price">
+500 000 FCFA
+</div>
+
+<button
+class="add"
+onclick="addToCart('iPhone 16e',500000)">
+
+Ajouter au panier
+
+</button>
+
+</div>
+
+
+<!-- IPHONE 15 -->
+
+<div
+class="product"
+data-category="phone"
+data-name="iPhone 15">
+
+<button
+class="favorite"
+onclick="toggleFavorite(this,'iPhone 15')">
+
+♡
+
+</button>
+
+<div class="product-image">
+
+<img
+src="images/IMG_2017.jpeg"
+alt="iPhone 15">
+
+</div>
+
+<h3>
+iPhone 15
+</h3>
+
+<p class="description">
+iPhone Apple avec appareil photo performant.
+</p>
+
+<div class="price">
+550 000 FCFA
+</div>
+
+<button
+class="add"
+onclick="addToCart('iPhone 15',550000)">
+
+Ajouter au panier
+
+</button>
+
+</div>
+
+
+<!-- SIMULATEUR -->
+
+<div
+class="product"
+data-category="simulation"
+data-name="Simulateur de vol">
+
+<button
+class="favorite"
+onclick="toggleFavorite(this,'Simulateur de vol')">
+
+♡
+
+</button>
+
+<div class="product-image">
+
+<img
+src="images/IMG_2029.jpeg"
+alt="Simulateur de vol">
+
+</div>
+
+<h3>
+Simulateur de vol
+</h3>
+
+<p class="description">
+Simulateur de vol réaliste pour une expérience immersive.
+</p>
+
+<div class="price">
+1 500 000 FCFA
+</div>
+
+<button
+class="add"
+onclick="addToCart('Simulateur de vol',1500000)">
+
+Ajouter au panier
+
+</button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<button
+class="cart-floating"
+onclick="openCart()">
+
+🛒 Panier
+(<span id="floatingCount">0</span>)
+
+</button>
+
+
+<!-- PANIER -->
+
+<div
+class="modal"
+id="cartModal">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>
+🛒 Mon panier
+</h2>
+
+<button
+class="close"
+onclick="closeCart()">
+
+×
+
+</button>
+
+</div>
+
+
+<div id="cartItems">
+</div>
+
+
+<div class="total">
+
+Total :
+<span id="cartTotal">0</span>
+FCFA
+
+</div>
+
+
+<button
+class="confirm"
+onclick="openOrder()">
+
+📦 Continuer la commande
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- COMMANDE -->
+
+<div
+class="modal"
+id="orderModal">
+
+<div class="modal-content">
+
+<div class="modal-header">
+
+<h2>
+💳 Paiement
+</h2>
+
+<button
+class="close"
+onclick="closeOrder()">
+
+×
+
+</button>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Nom complet
+</label>
+
+<input
+type="text"
+id="customerName"
+placeholder="Votre nom">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Numéro de téléphone
+</label>
+
+<input
+type="tel"
+id="customerPhone"
+placeholder="Votre numéro">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Adresse de livraison
+</label>
+
+<input
+type="text"
+id="customerAddress"
+placeholder="Votre adresse">
+
+</div>
+
+
+<div class="payment">
+
+<h3>
+💳 Mode de paiement
+</h3>
+
+<label>
+
+<input
+type="radio"
+name="payment"
+value="MTN Mobile Money"
+checked>
+
+MTN Mobile Money
+
+</label>
+
+
+<label>
+
+<input
+type="radio"
+name="payment"
+value="Moov Money">
+
+Moov Money
+
+</label>
+
+
+<label>
+
+<input
+type="radio"
+name="payment"
+value="Carte bancaire">
+
+Carte bancaire
+
+</label>
+
+</div>
+
+
+<div class="total">
+
+Montant à payer :
+<span id="paymentTotal">0</span>
+FCFA
+
+</div>
+
+
+<button
+class="pay-button"
+onclick="startKkiaPay()">
+
+💳 Payer avec KKiaPay
+
+</button>
+
+
+</div>
+
+</div>
+
+
+<div id="message">
+</div>
+
+
+<footer>
+
+<h2>
+PARTIENCE MARKET
+</h2>
+
+<p>
+Votre boutique électronique
+</p>
+
+<div class="phone">
+📞 01 56 80 41 51
+</div>
+
+
+<a
+class="whatsapp"
+href="https://wa.me/2290156804151"
+target="_blank">
+
+💬 WhatsApp
+
+</a>
+
+
+<p
+style="margin-top:20px;font-size:13px">
+
+© 2026 PARTIENCE MARKET
+
+</p>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   CONFIGURATION KKIAPAY
+========================= */
+
+const KKIAPAY_PUBLIC_KEY =
+"57688fd0998011f1803c4f54cd3ebab6";
+
+
+/* =========================
+   PANIER
+========================= */
+
+let cart =
+JSON.parse(
+localStorage.getItem("partience_cart")
+) || [];
+
+
+let favorites =
+JSON.parse(
+localStorage.getItem("partience_favorites")
+) || [];
+
+
+/* =========================
+   SAUVEGARDE
+========================= */
+
+function saveCart(){
+
+localStorage.setItem(
+"partience_cart",
+JSON.stringify(cart)
+);
+
+}
+
+
+/* =========================
+   AJOUTER AU PANIER
+========================= */
+
+function addToCart(name,price){
+
+let existing =
+cart.find(function(item){
+
+return item.name === name;
+
+});
+
+
+if(existing){
+
+existing.quantity++;
+
+}else{
+
+cart.push({
+
+name:name,
+
+price:price,
+
+quantity:1
+
+});
+
+}
+
+
+saveCart();
+
+updateCart();
+
+showMessage(
+"🛒 Produit ajouté au panier !"
+);
+
+}
+
+
+/* =========================
+   COMPTEUR
+========================= */
+
+function updateCart(){
+
+let count=0;
+
+cart.forEach(function(item){
+
+count += item.quantity;
+
+});
+
+
+document.getElementById(
+"topCount"
+).textContent=count;
+
+
+document.getElementById(
+"floatingCount"
+).textContent=count;
+
+}
+
+
+/* =========================
+   TOTAL
+========================= */
+
+function getCartTotal(){
+
+let total=0;
+
+cart.forEach(function(item){
+
+total += item.price * item.quantity;
+
+});
+
+return total;
+
+}
+
+
+/* =========================
+   PANIER
+========================= */
+
+function openCart(){
+
+document.getElementById(
+"cartModal"
+).style.display="block";
+
+displayCart();
+
+}
+
+
+function closeCart(){
+
+document.getElementById(
+"cartModal"
+).style.display="none";
+
+}
+
+
+function displayCart(){
+
+let zone =
+document.getElementById(
+"cartItems"
+);
+
+zone.innerHTML="";
+
+
+if(cart.length===0){
+
+zone.innerHTML=`
+
+<div style="text-align:center;padding:25px">
+
+<h3>
+Votre panier est vide 🛒
+</h3>
+
+<p style="margin-top:8px">
+Ajoutez un produit pour commencer.
+</p>
+
+</div>
+
+`;
+
+document.getElementById(
+"cartTotal"
+).textContent="0";
+
+return;
+
+}
+
+
+let total=0;
+
+
+cart.forEach(function(item,index){
+
+let subtotal =
+item.price * item.quantity;
+
+total += subtotal;
+
+
+zone.innerHTML += `
+
+<div class="cart-item">
+
+<div class="cart-info">
+
+<div class="cart-name">
+${item.name}
+</div>
+
+<div>
+${item.price.toLocaleString()} FCFA
+</div>
+
+<div class="quantity">
+
+<button
+onclick="changeQuantity(${index},-1)">
+
+−
+
+</button>
+
+<strong>
+${item.quantity}
+</strong>
+
+<button
+onclick="changeQuantity(${index},1)">
+
++
+
+</button>
+
+</div>
+
+</div>
+
+<div>
+
+<strong>
+${subtotal.toLocaleString()} FCFA
+</strong>
+
+<br><br>
+
+<button
+class="delete"
+onclick="removeItem(${index})">
+
+🗑️
+
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById(
+"cartTotal"
+).textContent =
+total.toLocaleString();
+
+}
+
+
+function changeQuantity(index,change){
+
+cart[index].quantity += change;
+
+
+if(cart[index].quantity<=0){
+
+cart.splice(index,1);
+
+}
+
+
+saveCart();
+
+updateCart();
+
+displayCart();
+
+}
+
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+saveCart();
+
+updateCart();
+
+displayCart();
+
+}
+
+
+/* =========================
+   FAVORIS
+========================= */
+
+function toggleFavorite(button,name){
+
+if(favorites.includes(name)){
+
+favorites =
+favorites.filter(function(item){
+
+return item !== name;
+
+});
+
+button.textContent="♡";
+
+}else{
+
+favorites.push(name);
+
+button.textContent="♥";
+
+}
+
+
+localStorage.setItem(
+"partience_favorites",
+JSON.stringify(favorites)
+);
+
+}
+
+
+/* =========================
+   RECHERCHE
+========================= */
+
+function searchProducts(){
+
+let text =
+document.getElementById(
+"search"
+).value.toLowerCase();
+
+
+let products =
+document.querySelectorAll(".product");
+
+
+products.forEach(function(product){
+
+let name =
+product.dataset.name.toLowerCase();
+
+
+if(name.includes(text)){
+
+product.style.display="";
+
+}else{
+
+product.style.display="none";
+
+}
+
+});
+
+}
+
+
+/* =========================
+   FILTRE
+========================= */
+
+function filterProducts(category){
+
+let products =
+document.querySelectorAll(".product");
+
+
+products.forEach(function(product){
+
+if(
+category==="all" ||
+product.dataset.category===category
+){
+
+product.style.display="";
+
+}else{
+
+product.style.display="none";
+
+}
+
+});
+
+}
+
+
+/* =========================
+   COMMANDE
+========================= */
+
+function openOrder(){
+
+if(cart.length===0){
+
+showMessage(
+"⚠️ Votre panier est vide."
+);
+
+return;
+
+}
+
+
+document.getElementById(
+"cartModal"
+).style.display="none";
+
+
+document.getElementById(
+"orderModal"
+).style.display="block";
+
+
+document.getElementById(
+"paymentTotal"
+).textContent =
+getCartTotal().toLocaleString();
+
+}
+
+
+function closeOrder(){
+
+document.getElementById(
+"orderModal"
+).style.display="none";
+
+}
+
+
+/* =========================
+   KKIAPAY
+========================= */
+
+function startKkiaPay(){
+
+if(cart.length===0){
+
+showMessage(
+"⚠️ Votre panier est vide."
+);
+
+return;
+
+}
+
+
+let name =
+document.getElementById(
+"customerName"
+).value.trim();
+
+
+let phone =
+document.getElementById(
+"customerPhone"
+).value.trim();
+
+
+let address =
+document.getElementById(
+"customerAddress"
+).value.trim();
+
+
+if(!name){
+
+showMessage(
+"⚠️ Entrez votre nom."
+);
+
+return;
+
+}
+
+
+if(!phone){
+
+showMessage(
+"⚠️ Entrez votre numéro."
+);
+
+return;
+
+}
+
+
+if(!address){
+
+showMessage(
+"⚠️ Entrez votre adresse."
+);
+
+return;
+
+}
+
+
+let total =
+getCartTotal();
+
+
+if(total<=0){
+
+showMessage(
+"⚠️ Montant invalide."
+);
+
+return;
+
+}
+
+
+/*
+   Informations envoyées avec
+   la transaction.
+*/
+
+let orderData = {
+
+shop:"PARTIENCE MARKET",
+
+customer:name,
+
+phone:phone,
+
+address:address,
+
+products:cart
+
+};
+
+
+/*
+   OUVERTURE KKIAPAY SANDBOX
+*/
+
+openKkiapayWidget({
+
+amount:total,
+
+position:"center",
+
+sandbox:true,
+
+key:KKIAPAY_PUBLIC_KEY,
+
+phone:phone,
+
+name:name,
+
+data:JSON.stringify(orderData),
+
+theme:"#2563eb"
+
+});
+
+}
+
+
+/* =========================
+   SUCCÈS KKIAPAY
+========================= */
+
+addSuccessListener(function(response){
+
+console.log(
+"Paiement KKiaPay réussi :",
+response
+);
+
+
+let transactionId =
+response.transactionId || "";
+
+
+let total =
+getCartTotal();
+
+
+showMessage(
+"✅ Paiement Sandbox réussi !"
+);
+
+
+/*
+   Pour le moment nous vidons
+   le panier après le succès.
+*/
+
+cart=[];
+
+saveCart();
+
+updateCart();
+
+closeOrder();
+
+
+alert(
+"Paiement Sandbox réussi !\n\n" +
+"Montant : " +
+total.toLocaleString() +
+" FCFA\n\n" +
+"Transaction : " +
+transactionId
+);
+
+});
+
+
+/* =========================
+   ÉCHEC KKIAPAY
+========================= */
+
+addFailedListener(function(error){
+
+console.log(
+"Paiement KKiaPay échoué :",
+error
+);
+
+
+alert(
+"❌ Le paiement n'a pas abouti.\n\n" +
+"Vous pouvez réessayer."
+);
+
+});
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(text){
+
+let box =
+document.getElementById(
+"message"
+);
+
+box.textContent=text;
+
+box.style.display="block";
+
+
+setTimeout(function(){
+
+box.style.display="none";
+
+},2500);
+
+}
+
+
+/* =========================
+   SCROLL
+========================= */
+
+function scrollToProducts(){
+
+document.getElementById(
+"products"
+).scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+}
+
+
+/* =========================
+   INITIALISATION
+========================= */
+
+updateCart();
+
+</script>
+
+
+</body>
+</html>
